@@ -33,6 +33,7 @@ repo_prs = function(repo, state = c("open","closed","all")) {
           pr = integer(),
           id = integer(),
           title = character(),
+          created = lubridate::POSIXct(),
           state = character(),
           base_ref = character(),
           head_ref = character()
@@ -43,6 +44,8 @@ repo_prs = function(repo, state = c("open","closed","all")) {
           pr = purrr::map_int(result(res), "number", .default = NA),
           id = purrr::map_int(result(res), "id", .default = NA),
           title = purrr::map_chr(result(res), "title", .default = NA),
+          created = lubridate::ymd_hms(
+            purrr::map_chr(result(res), "created_at", .default = NA), tz = "America/Vancouver"),
           state = purrr::map_chr(result(res), "state", .default = NA),
           base_ref = purrr::map_chr(result(res), c("base","ref"), .default = NA),
           head_ref = purrr::map_chr(result(res), c("head","ref"), .default = NA)
