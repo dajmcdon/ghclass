@@ -57,7 +57,8 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
           tmp <- tempfile(fileext = ext)
 
           dat = readLines(file)
-          has_text <- which(dat != "")
+          has_text <- which(! grepl("^\\s$|^#", b))
+          # should ignore empty lines `^\\s$` and lines starting with `#`
           dump <- sample(has_text, n, replace = FALSE)
           dat[dump] <- replace_str
           writeLines(dat, tmp)
@@ -74,14 +75,14 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
               branch = branch,
               verbose = TRUE
             )
+            unlink(tmp)
           } else {
-
+            unlink(tmp)
             cli::cli_alert_danger( c(
               "Failed to add file {.val {gh_path}} to repo {.val {repo}}, this file already exists. ",
               "If you want to force add this file, re-run the command with {.code overwrite = TRUE}."
             ) )
           }
-          unlink(tmp)
         }
       )
     }
@@ -99,7 +100,8 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
 #' @export
 repo_add_sampled_data_file = function(repo, file, n, replace = FALSE,
                                       message = NULL, repo_folder = NULL,
-                                      branch = NULL, preserve_path = FALSE, overwrite = FALSE) {
+                                      branch = NULL, preserve_path = FALSE,
+                                      overwrite = FALSE) {
 
 
   arg_is_chr(repo, file)

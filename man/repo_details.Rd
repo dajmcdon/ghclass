@@ -40,7 +40,7 @@ repo_issues(
 
 repo_n_commits(repo, quiet = FALSE)
 
-repo_prs(repo, state = c("open", "closed", "all"))
+repo_prs(repo, state = c("open", "closed", "all"), tz = "America/Vancouver")
 }
 \arguments{
 \item{repo}{Character. Address of repository in \code{owner/name} format.}
@@ -75,6 +75,9 @@ Pass in "none" for issues with no assigned user, and "*" for issues assigned to 
 \item{sort}{Character. What to sort results by. Can be either "created", "updated", or "comments".}
 
 \item{direction}{Character. The direction of the sort. Can be either "asc" or "desc".}
+
+\item{tz}{Character. A time zone for PR Date/Time conversion. See
+\code{lubridate::force_tz()} for  alternatives (\code{tz = "UTC"} would be natural).}
 }
 \description{
 \itemize{

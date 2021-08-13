@@ -13,9 +13,12 @@ github_api_repo_prs = function(repo, state) {
 #' @rdname repo_details
 #'
 #' @param state Character. Pull request state.
+#' @param tz Character. A time zone for PR Date/Time conversion. See
+#'   `lubridate::force_tz()` for  alternatives (`tz = "UTC"` would be natural).
 #' @export
 #'
-repo_prs = function(repo, state = c("open","closed","all")) {
+repo_prs = function(repo, state = c("open","closed","all"),
+                    tz = "America/Vancouver") {
   state = match.arg(state)
   arg_is_chr(repo)
   arg_is_chr_scalar(state)
@@ -45,7 +48,7 @@ repo_prs = function(repo, state = c("open","closed","all")) {
           id = purrr::map_int(result(res), "id", .default = NA),
           title = purrr::map_chr(result(res), "title", .default = NA),
           created = lubridate::ymd_hms(
-            purrr::map_chr(result(res), "created_at", .default = NA), tz = "America/Vancouver"),
+            purrr::map_chr(result(res), "created_at", .default = NA), tz = tz),
           state = purrr::map_chr(result(res), "state", .default = NA),
           base_ref = purrr::map_chr(result(res), c("base","ref"), .default = NA),
           head_ref = purrr::map_chr(result(res), c("head","ref"), .default = NA)
