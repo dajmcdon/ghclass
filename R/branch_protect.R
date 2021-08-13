@@ -14,14 +14,14 @@
 #   )
 # }
 #
-# github_api_branch_unprotect = function(repo, branch) {
-#   ghclass_api_v3_req(
-#     "DELETE /repos/:owner/:repo/branches/:branch/protection",
-#     owner = get_repo_owner(repo),
-#     repo = get_repo_name(repo),
-#     branch = branch
-#   )
-# }
+github_api_branch_unprotect = function(repo, branch) {
+  ghclass_api_v3_req(
+    "DELETE /repos/:owner/:repo/branches/:branch/protection",
+    owner = get_repo_owner(repo),
+    repo = get_repo_name(repo),
+    branch = branch
+  )
+}
 #
 #
 #
@@ -44,23 +44,26 @@
 #   )
 # }
 #
-# branch_unprotect = function(repo, branch) {
-#   arg_is_chr(repo, branch)
-#
-#   purrr::walk2(
-#     repo, branch,
-#     function(repo, branch) {
-#
-#       res = purrr::safely(github_api_branch_unprotect)(repo, branch)
-#
-#       repo_fmt = format_repo(repo, branch)
-#
-#       status_msg(
-#         res,
-#         "Removing protection from branch {.val {repo_fmt}}.",
-#         "Failed to remove protection from branch {.val {repo_fmt}}."
-#       )
-#     }
-#   )
-# }
-#
+
+#' @describeIn branch_protect_with_review Removes any branch protection
+#' @export
+branch_unprotect = function(repo, branch) {
+  arg_is_chr(repo, branch)
+
+  purrr::walk2(
+    repo, branch,
+    function(repo, branch) {
+
+      res = purrr::safely(github_api_branch_unprotect)(repo, branch)
+
+      repo_fmt = format_repo(repo, branch)
+
+      status_msg(
+        res,
+        "Removing protection from branch {.val {repo_fmt}}.",
+        "Failed to remove protection from branch {.val {repo_fmt}}."
+      )
+    }
+  )
+}
+

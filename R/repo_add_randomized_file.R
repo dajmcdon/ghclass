@@ -53,15 +53,16 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
           if (!preserve_path)
             gh_path = fs::path_file(file)
 
-          ext <- tools::file_ext(file)
-          tmp <- tempfile(fileext = ext)
+          # ext <- tools::file_ext(file)
+          # tmp <- tempfile(fileext = ext)
 
           dat = readLines(file)
           has_text <- which(! grepl("^\\s$|^#", b))
           # should ignore empty lines `^\\s$` and lines starting with `#`
           dump <- sample(has_text, n, replace = FALSE)
           dat[dump] <- replace_str
-          writeLines(dat, tmp)
+          dat <- paste0(dat, collapse = "\n")
+          # writeLines(dat, tmp)
 
           if(!is.null(repo_folder))
             gh_path = fs::path(repo_folder, gh_path)
@@ -70,7 +71,7 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
             repo_put_file(
               repo = repo,
               path = gh_path,
-              content = read_bin_file(tmp),
+              content = dat,
               message = message,
               branch = branch,
               verbose = TRUE
