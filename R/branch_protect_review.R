@@ -5,12 +5,12 @@ github_api_branch_protect_with_review <-function(repo, branch,
   body <- paste0(
     '{',
     '"required_status_checks":null,',
-    str_glue('"enforce_admins":{enforce_admins},'),
+    stringr::str_glue('"enforce_admins":{enforce_admins},'),
     '"required_pull_request_reviews"',
     ':{',
     '"dismiss_stale_reviews":false,',
-    str_glue('"require_code_owner_reviews":{code_owners},'),
-    str_glue('"required_approving_review_count":{n_approvals}'),
+    stringr::str_glue('"require_code_owner_reviews":{code_owners},'),
+    stringr::str_glue('"required_approving_review_count":{n_approvals}'),
     '},',
     '"restrictions":null',
     '}'
@@ -63,21 +63,30 @@ branch_protect_with_review <- function(repo, branch,
                                        code_owners = FALSE,
                                        enforce_admins = FALSE) {
   arg_is_chr(repo, branch)
-  n_approvals <- as.character(round(n_approvals))
-  code_owners <- tolower(as.character(code_owners))
-  enforce_admins <- tolower(as.character(enforce_admins))
+  n_app <- as.character(n_approvals <- round(n_approvals))
+  codeowners <- tolower(as.character(code_owners))
+  enforceadmins <- tolower(as.character(enforce_admins))
 
   purrr::walk2(
     repo, branch,
     function(repo, branch) {
       res = purrr::safely(github_api_branch_protect_with_review)(
-        repo, branch, n_approvals, code_owners, enforce_admins)
+        repo, branch, n_app, codeowners, enforceadmins)
 
       repo_fmt = format_repo(repo, branch)
 
+
+      msg <- paste0(
+        "Protecting branch {.val {repo_fmt}}",
+        " and requiring {.val {n_approvals}} review(s)"
+      )
+      msg <- ifelse(
+        code_owners,
+        paste0(msg, " from CODEOWNERS."),
+        paste0(msg, "."))
       status_msg(
         res,
-        "Protecting branch {.val {repo_fmt}}, and requiring 1 review from CODEOWNERS.",
+        "Protecting branch {.val {repo_fmt}}, and requiring  review from CODEOWNERS.",
         "Failed to protect branch {.val {repo_fmt}}."
       )
     }
