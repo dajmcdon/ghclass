@@ -28,7 +28,7 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
                                          branch = NULL, preserve_path = FALSE, overwrite = FALSE) {
 
   arg_is_chr(repo, file)
-  arg_is_pos_int_scalar(ndump)
+  arg_is_pos_int_scalar(nreplace)
   arg_is_chr(branch, allow_null=TRUE)
   arg_is_chr_scalar(repo_folder, message, allow_null = TRUE)
   arg_is_lgl_scalar(preserve_path, overwrite)
@@ -59,7 +59,7 @@ repo_add_randomized_text_file = function(repo, file, nreplace = 2, replace_str =
           dat = readLines(file)
           has_text <- which(! grepl("^\\s$|^#", b))
           # should ignore empty lines `^\\s$` and lines starting with `#`
-          dump <- sample(has_text, n, replace = FALSE)
+          dump <- sample(has_text, nreplace, replace = FALSE)
           dat[dump] <- replace_str
           dat <- paste0(dat, collapse = "\n")
           # writeLines(dat, tmp)
