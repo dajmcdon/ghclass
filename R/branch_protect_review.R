@@ -74,21 +74,12 @@ branch_protect_with_review <- function(repo, branch,
         repo, branch, n_app, codeowners, enforceadmins)
 
       repo_fmt = format_repo(repo, branch)
-
-
       msg <- paste0(
         "Protecting branch {.val {repo_fmt}}",
         " and requiring {.val {n_approvals}} review(s)"
       )
-      msg <- ifelse(
-        code_owners,
-        paste0(msg, " from CODEOWNERS."),
-        paste0(msg, "."))
-      status_msg(
-        res,
-        msg,
-        "Failed to protect branch {.val {repo_fmt}}."
-      )
+      msg <- paste0(msg, ifelse(code_owners, " from CODEOWNERS.", "."))
+      status_msg(res, msg, "Failed to protect branch {.val {repo_fmt}}.")
     }
   )
 }
