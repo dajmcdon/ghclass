@@ -7,12 +7,25 @@
 \usage{
 branch_unprotect(repo, branch)
 
-branch_protect_with_review(repo, branch)
+branch_protect_with_review(
+  repo,
+  branch,
+  n_approvals = 1L,
+  code_owners = FALSE,
+  enforce_admins = FALSE
+)
 }
 \arguments{
 \item{repo}{Github repository address in \code{owner/repo} format.}
 
 \item{branch}{Repository branch to use.}
+
+\item{n_approvals}{Integer. Number of required PR reviews. Rounds to nearest
+integer if necessary.}
+
+\item{code_owners}{Logical. Must CODEOWNERS reviews be required.}
+
+\item{enforce_admins}{Logical. Does protection apply to admins.}
 }
 \value{
 
