@@ -86,7 +86,7 @@ branch_protect_with_review <- function(repo, branch,
         paste0(msg, "."))
       status_msg(
         res,
-        "Protecting branch {.val {repo_fmt}}, and requiring  review from CODEOWNERS.",
+        msg,
         "Failed to protect branch {.val {repo_fmt}}."
       )
     }
