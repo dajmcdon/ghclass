@@ -47,7 +47,6 @@ github_api_branch_protect_with_review <-function(repo, branch,
 #' @param enforce_admins Logical. Does protection apply to admins.
 #'
 #'
-#' @return
 #' @export
 #'
 #' @examples

@@ -2,7 +2,6 @@
 #' @rdname action
 #'
 #' @title Retrieve information about GitHub Actions workflows and their runs.
-#'
 #' @description
 #' * `action_workflows` - retrieve details on repo workflows.
 #'
@@ -25,8 +24,6 @@ NULL
 #' @rdname action_badge
 #'
 #' @title Add or remove GitHub Actions badges from a repository
-#'
-#'
 #' @description
 #' * `action_add_badge` - Add a GitHub Actions badge to a file.
 #'

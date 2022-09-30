@@ -120,3 +120,25 @@ repo_commits = function(repo, branch = NULL, sha = branch, path = NULL,
     }
   )
 }
+
+#' Collect the time of the most recent commit on a branch
+#'
+#' Useful for determining if assignments have been completed on time.
+#'
+#' @rdname repo_details
+#'
+#' @param timezone Time zone of returned date/time
+#'
+#' @return A tibble with columns repo and time.
+#' @export
+repo_latest_commit <- function(repo, branch, timezone = "America/Vancouver") {
+  arg_is_chr_scalar(timezone)
+  arg_is_chr(repo, branch)
+  purrr::map2_dfr(repo, branch, ~ {
+    repo_commits(.x, .y) %>%
+      dplyr::arrange(date) %>%
+      dplyr::slice_tail(n = 1) %>%
+      dplyr::select(repo, date) %>%
+      dplyr::mutate(date = lubridate::with_tz(date, timezone))
+  })
+}

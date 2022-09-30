@@ -7,6 +7,7 @@
 \alias{repo_branches}
 \alias{repo_clone_url}
 \alias{repo_commits}
+\alias{repo_latest_commit}
 \alias{repo_issues}
 \alias{repo_n_commits}
 \alias{repo_pr_reviewers}
@@ -27,6 +28,8 @@ repo_commits(
   until = NULL,
   quiet = FALSE
 )
+
+repo_latest_commit(repo, branch, timezone = "America/Vancouver")
 
 repo_issues(
   repo,
@@ -65,6 +68,8 @@ repo_prs(repo, state = c("open", "closed", "all"), tz = "America/Vancouver")
 
 \item{quiet}{Logical. Should an error message be printed if a repo does not exist.}
 
+\item{timezone}{Time zone of returned date/time}
+
 \item{state}{Character. Pull request state.}
 
 \item{assignee}{Character. Return issues assigned to a particular username.
@@ -85,6 +90,9 @@ Pass in "none" for issues with no assigned user, and "*" for issues assigned to 
 \item{tz}{Character. A time zone for PR Date/Time conversion. See
 \code{lubridate::force_tz()} for  alternatives (\code{tz = "UTC"} would be natural).}
 }
+\value{
+A tibble with columns repo and time.
+}
 \description{
 \itemize{
 \item \code{repo_clone_url} - Returns the url, for cloning, a GitHub repo (either ssh or https)
@@ -94,6 +102,8 @@ Pass in "none" for issues with no assigned user, and "*" for issues assigned to 
 \item \code{repo_n_commits} - Returns a tibble of the number of commits in a GitHub repository (and branch).
 \item \code{repo_prs} - Returns a tibble of pull requests for a GitHub repository.
 }
+
+Useful for determining if assignments have been completed on time.
 }
 \examples{
 \dontrun{

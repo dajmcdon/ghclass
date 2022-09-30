@@ -27,9 +27,6 @@ integer if necessary.}
 
 \item{enforce_admins}{Logical. Does protection apply to admins.}
 }
-\value{
-
-}
 \description{
 Adds or removes branch protection on the repo. Specifically,
 added branch protection enforces 1 approving
@@ -39,9 +36,9 @@ file in the repo root (on \code{main/master}).
 }
 \section{Functions}{
 \itemize{
-\item \code{branch_unprotect}: Removes any branch protection
-}}
+\item \code{branch_unprotect()}: Removes any branch protection
 
+}}
 \examples{
 \dontrun{
 repo_create("ghclass-test", "protect_me", auto_init=TRUE)
