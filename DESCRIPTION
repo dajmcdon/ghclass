@@ -1,4 +1,4 @@
-Package: ghclass
+Package: ghclass2
 Title: Tools for Managing Classes on GitHub
 Version: 0.2.2
 Authors@R: 
@@ -20,9 +20,11 @@ Description: This  package is designed to enable instructors to
     of functionality for managing organizations, teams, repositories, 
     and users on GitHub and helps automate most of the tedious and 
     repetitive tasks around creating and distributing assignments.
+    It has been renamed so as not to conflict with the original
+    CRAN version of ghclass.
 License: GPL-3 + file LICENSE
-URL: https://github.com/rundel/ghclass
-BugReports: https://github.com/rundel/ghclass/issues
+URL: https://github.com/dajmcdon/ghclass
+BugReports: https://github.com/dajmcdon/ghclass/issues
 Depends: 
     R (>= 3.4.0)
 Imports: 
