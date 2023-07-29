@@ -1,5 +1,6 @@
-# ghclass2 (development version)
+# ghclass (development version)
 
+* Versioning altered to avoid conflicts (1.x.x)
 * renamed to avoid conflicts with the CRAN version
 * A number of updates and tweaks are added for personal use.
 * Bugs are to be expected.
