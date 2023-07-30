@@ -1,32 +1,26 @@
 Package: ghclass
 Title: Tools for Managing Classes on GitHub
 Version: 1.0.1
-Authors@R: 
-    c(person(given = "Colin",
-             family = "Rundel",
-             role = c("aut", "cre"),
-             email = "rundel@gmail.com"),
-      person(given = "Mine",
-             family = "Cetinkaya-Rundel",
-             role = "aut",
-             email = "mine@rstudio.com"),
-      person(given = "Therese",
-             family = "Anders",
-             role = "ctb",
-             email = "tanders@usc.edu"),
-      person("Daniel", "McDonald",,"daniel@stat.ubc.ca", role="ctb"))
+Authors@R: c(
+    person("Colin", "Rundel", , "rundel@gmail.com", role = c("aut", "cre")),
+    person("Mine", "Cetinkaya-Rundel", , "mine@rstudio.com", role = "aut"),
+    person("Therese", "Anders", , "tanders@usc.edu", role = "ctb"),
+    person("Daniel", "McDonald", , "daniel@stat.ubc.ca", role = "ctb")
+  )
+Description: Interface for the GitHub API that enables efficient
+    management of courses on GitHub. It has a functionality for managing
+    organizations, teams, repositories, and users on GitHub and helps
+    automate most of the tedious and repetitive tasks around creating and
+    distributing assignments.
+License: GPL-3
 URL: https://github.com/dajmcdon/ghclass
 BugReports: https://github.com/dajmcdon/ghclass/issues
-Description: Interface for the GitHub API that enables efficient 
-    management of courses on GitHub. It has a functionality for 
-    managing organizations, teams, repositories, and users on GitHub 
-    and helps automate most of the tedious and repetitive tasks 
-    around creating and distributing assignments.
-License: GPL-3
 Depends: 
     R (>= 3.4.0)
 Imports: 
     base64enc,
+    cli (>= 3.0.0),
+    dplyr,
     fs,
     gh,
     glue,
@@ -36,20 +30,18 @@ Imports:
     rlang,
     tibble,
     whisker,
-    withr,
-    dplyr,
-    cli (>= 3.0.0)
+    withr
 Suggests: 
+    gert,
+    gitcreds,
     here,
     knitr,
+    readr,
     rmarkdown,
     sodium,
     styler,
-    usethis,
-    gert,
-    readr,
-    gitcreds
+    usethis
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

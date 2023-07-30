@@ -91,12 +91,11 @@ Pass in "none" for issues with no assigned user, and "*" for issues assigned to 
 \code{lubridate::force_tz()} for  alternatives (\code{tz = "UTC"} would be natural).}
 }
 \value{
-A tibble with columns repo and time.
-}
-\value{
 \code{repo_clone_url()} and \code{repo_branches()} both return a character vector.
 
 \code{repo_commits()}, \code{repo_issues()}, \code{repo_n_commits()}, and \code{repo_prs()} all return a tibble.
+
+A tibble with columns repo and time.
 }
 \description{
 \itemize{
