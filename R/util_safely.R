@@ -47,11 +47,16 @@ any_failed = function(x) {
   any(purrr::map_lgl(x, failed))
 }
 
-return_on_any_failed = function(x) {
-  if (any_failed(x))
-    do.call(return, list(), envir = sys.frame(-1))
-}
 
+
+
+
+
+return_on_any_failed = function(x) {
+  if (any_failed(x)) {
+    do.call("return", list(), envir = sys.frame(-1))
+  }
+}
 
 error_msg = function(x) {
   msg = error(x)[["message"]]
@@ -158,6 +163,8 @@ status_msg = function(x, success = NULL, fail = NULL, include_error_msg = TRUE,
       cli::cat_line(error_msg_tree(msg))
     }
   }
+
+  invisible(x)
 }
 
 error_msg_tree = function(msg) {

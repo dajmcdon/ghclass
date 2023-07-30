@@ -17,12 +17,23 @@ github_reset_token()
 github_test_token(token = github_get_token())
 }
 \arguments{
-\item{token}{Character. Either the literal token path, or the path to a file containing the token.}
+\item{token}{Character. Either the literal token, or the path to a file containing the token.}
+}
+\value{
+\code{github_get_token()} returns the current PAT as a character string with the \code{gh_pat}
+class. See \code{\link[gh:gh_token]{gh::gh_token()}} for additional details.
+
+\code{github_set_token()} and \code{github_reset_token()} return the result of \code{Sys.setenv()} and
+\code{Sys.unsetenv()} respectively.
+
+\code{github_test_token()} invisibly returns a logical value, \code{TRUE} if the test passes,
+\code{FALSE} if not.
 }
 \description{
 \itemize{
 \item \code{github_get_token} - returns the user's GitHub personal access token (PAT).
-\item \code{github_set_token} - defines the user's GitHub PAT by setting the \code{GITHUB_PAT} environmental variable. This value can then
+\item \code{github_set_token} - defines the user's GitHub PAT by setting the \code{GITHUB_PAT} environmental variable.
+This value will persist until the session ends or \code{gihub_reset_token()} is called.
 \item \code{github_reset_token} - removes the value stored in the \code{GITHUB_PAT} environmental variable.
 \item \code{github_test_token} - checks if a PAT is valid by attempting to authenticate with the GitHub API
 }
@@ -31,17 +42,25 @@ github_test_token(token = github_get_token())
 This package looks for the personal access token (PAT) in the following places (in order):
 \itemize{
 \item Value of \code{GITHUB_PAT} environmental variable.
-\item Value of \code{GITHUB_TOKEN} environmental variable.
-\item Contents of \verb{~/.github/token} file.
+\item Any GitHub PAT token(s) stored with \code{gitcreds} via \code{gitcreds_set()}.
+}
+
+For additional details on creating a GitHub PAT see the usethis vignette on
+\href{https://usethis.r-lib.org/articles/articles/git-credentials.html}{Managing Git(Hub) Credentials}.
+For those who do not wish to read the entire article, the quick start method is to use:
+\itemize{
+\item \code{usethis::create_github_token()} - to create the token and then,
+\item \code{gitcreds::gitcreds_set()} - to securely cache the token.
 }
 }
 \examples{
 \dontrun{
 github_test_token()
 
-pat = github_get_token()
+(pat = github_get_token())
 
-github_set_token("bad_token")
+github_set_token("ghp_BadTokenBadTokenBadTokenBadTokenBadToken")
+github_get_token()
 github_test_token()
 
 github_set_token(pat)

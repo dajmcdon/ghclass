@@ -17,3 +17,5 @@ pkgdown/
 vignettes/articles/
 Makefile
 ^cran-comments\.md$
+^\.github$
+^CRAN-SUBMISSION$

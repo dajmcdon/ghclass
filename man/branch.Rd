@@ -14,17 +14,21 @@ branch_delete(repo, branch)
 branch_remove(repo, branch)
 }
 \arguments{
-\item{repo}{Github repository address in \code{owner/repo} format.}
+\item{repo}{GitHub repository address in \code{owner/repo} format.}
 
 \item{branch}{Repository branch to use.}
 
 \item{new_branch}{Name of branch to create.}
 }
+\value{
+\code{branch_create()}and \code{branch_remove()} invisibly return a list containing
+the results of the relevant GitHub API call.
+}
 \description{
 \itemize{
-\item \code{branch_create} - creates a new branch from an existing GitHub repo.
-\item \code{branch_delete} - deletes a branch from an existing GitHub repo.
-\item \code{branch_remove} - previous name of \code{branch_delete}, deprecated.
+\item \code{branch_create()} - creates a new branch from an existing GitHub repo.
+\item \code{branch_delete()} - deletes a branch from an existing GitHub repo.
+\item \code{branch_remove()} - previous name of \code{branch_delete}, deprecated.
 }
 }
 \examples{

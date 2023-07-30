@@ -62,10 +62,10 @@ github_api_pr_comment = function(repo, pr_number, body) {
   arg_is_chr(repo, body)
   arg_is_pos_int(pr_number)
 
-  ghclass:::ghclass_api_v3_req(
+  ghclass_api_v3_req(
     endpoint = "POST /repos/:owner/:repo/issues/:issue_number/comments",
-    owner = ghclass:::get_repo_owner(repo),
-    repo = ghclass:::get_repo_name(repo),
+    owner = get_repo_owner(repo),
+    repo = get_repo_name(repo),
     issue_number = pr_number,
     body = body,
     .send_headers = c(Accept = "application/vnd.github.shadow-cat-preview+json")
@@ -91,7 +91,7 @@ pr_comment = function(repo, pr_number, body = "") {
       )
 
 
-      ghclass:::status_msg(
+      status_msg(
         res,
         "Commented on pull request number {pr_number} in {repo}.",
         "Failed to comment on pull request {pr_number} in {repo}."
