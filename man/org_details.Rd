@@ -17,7 +17,7 @@ org_repo_search(org, name, extra = "", full_repo = TRUE)
 
 org_repo_stats(
   org,
-  branch,
+  branch = NULL,
   filter = "",
   filter_type = "in:name",
   inc_commits = TRUE,
@@ -42,30 +42,39 @@ for details.}
 
 \item{full_repo}{Logical. Should the full repository address be returned (e.g. \code{owner/repo} instead of just \code{repo})?}
 
+\item{branch}{Character. The branch to use for counting commits, if \code{NULL} then each repo's default branch is used.}
+
 \item{filter}{Character. Regular expression pattern for matching (or excluding) results}
 
 \item{filter_type}{Character. One or more GitHub search \verb{in} qualifiers.
 See \href{https://help.github.com/en/articles/searching-for-repositories}{documentation}
 for more details.}
 
-\item{inc_commits}{Logical. Include commit statistics}
+\item{inc_commits}{Logical. Include commit statistics (\code{branch}, \code{commits}, \code{last_update})}
 
-\item{inc_issues}{Logical. Include issue statistics}
+\item{inc_issues}{Logical. Include issue statistics (\code{open_issues}, \code{closed_issues})}
 
-\item{inc_prs}{Logical. Include pull request statistics}
+\item{inc_prs}{Logical. Include pull request statistics (\code{open_prs}, \code{merged_prs}, \code{closed_prs})}
 
 \item{exclude}{Logical. Should entries matching the regular expression be excluded or included.}
 
 \item{team_type}{Character. Either "slug" if the team names are slugs or "name" if full team names are provided.}
 }
+\value{
+\code{org_exists()} returns a logical vector.
+
+\code{org_teams()}, \code{org_repos}, and \code{org_repo_search()} return a character vector of team or repo names.
+
+\code{org_team_details()} and \code{org_repo_stats()} return tibbles.
+}
 \description{
 \itemize{
-\item \code{org_exists} - returns \code{TRUE} if the organization(s) exist on GitHub and \code{FALSE} otherwise.
-\item \code{org_teams} - returns a (filtered) vector of organization teams.
-\item \code{org_team_details} - returns a data frame of all organization teams containing identification and permission details.
-\item \code{org_repos} - returns a (filtered) vector of organization repositories.
-\item \code{org_repo_search} - search for repositories within an organization (preferred for large organizations).
-\item \code{org_repo_stats} - returns a tibble of repositories belonging to a GitHub organization along with some
+\item \code{org_exists()} - returns \code{TRUE} if the organization(s) exist on GitHub and \code{FALSE} otherwise.
+\item \code{org_teams()} - returns a (filtered) vector of organization teams.
+\item \code{org_team_details()} - returns a data frame of all organization teams containing identification and permission details.
+\item \code{org_repos()} - returns a (filtered) vector of organization repositories.
+\item \code{org_repo_search()} - search for repositories within an organization (preferred for large organizations).
+\item \code{org_repo_stats()} - returns a tibble of repositories belonging to a GitHub organization along with some
 basic statistics about those repositories.
 }
 }

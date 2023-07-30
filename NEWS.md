@@ -1,14 +1,24 @@
-# ghclass (development version)
+# ghclass 1.0.1
 
 * Versioning altered to avoid conflicts (1.x.x)
 * renamed to avoid conflicts with the CRAN version
 * A number of updates and tweaks are added for personal use.
 * Bugs are to be expected.
 
-# ghclass 0.2.0.9000
+# ghclass 0.2.1
+
+* ghclass is now on [CRAN](https://cran.r-project.org/web/packages/ghclass/)!
+
 
 * improved action support with `action_runs()` and `action_status()`
 
+* revised how GitHub PATs are handled - now uses `gitcreds` by way of ` gh::gh_token()`
+
+* users are now warned about PATs in `.Renviron` a-la `usethis:::scold_for_renviron()`
+
+* Added version dependency on `cli` 3.0.0
+
+* Added support for default branches with `org_repo_stats()`
 
 # ghclass 0.2.0
 
