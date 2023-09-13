@@ -1,7 +1,9 @@
-github_api_branch_protect_with_review <-function(repo, branch,
-                                                 n_approvals,
-                                                 code_owners,
-                                                 enforce_admins) {
+github_api_branch_protect_with_review <- function(
+    repo,
+    branch,
+    n_approvals,
+    code_owners,
+    enforce_admins) {
   body <- paste0(
     '{',
     '"required_status_checks":null,',
